@@ -1,92 +1,203 @@
-# Symfony TP Final 
+# Yu-Gi-Oh! Card Management System
 
+A comprehensive web application built with Symfony 6.4 for managing Yu-Gi-Oh! trading cards, their editions, and supported languages. This system provides full CRUD (Create, Read, Update, Delete) functionality for card collections with a modern, responsive interface using Bulma CSS framework.
 
+## Features
 
-## Getting started
+- **Card Management**: Complete CRUD operations for Yu-Gi-Oh! cards including:
+  - Card name, category (Monster, Magic, Trap)
+  - Attributes (Fire, Water, Earth, etc.)
+  - Level, ATK/DEF statistics
+  - Type, specificity, and detailed descriptions
+  - Card images
+- **Edition Management**: Track card editions with release dates
+- **Language Support**: Multi-language card support
+- **Pagination**: Efficient browsing with KnpPaginatorBundle
+- **Responsive Design**: Modern UI with Bulma CSS framework
+- **Form Management**: User-friendly forms for data entry and editing
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Technologies Used
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+- **PHP 8.1+**
+- **Symfony 6.4** - Web framework
+- **Doctrine ORM 3.1** - Database abstraction layer
+- **PostgreSQL** - Primary database
+- **Twig 3.x** - Templating engine
+- **Bulma CSS** - UI framework
+- **KnpPaginatorBundle** - Pagination
+- **Docker & Docker Compose** - Containerization
+- **Stimulus & Turbo** - Frontend enhancements
 
-## Add your files
+## Requirements
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://www-apps.univ-lehavre.fr/forge/ca204216/symfony-tp-final.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://www-apps.univ-lehavre.fr/forge/ca204216/symfony-tp-final/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+- PHP 8.1 or higher
+- Composer
+- Docker and Docker Compose (for database)
+- PostgreSQL (if not using Docker)
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/amine-76/Symfony-project.git
+cd Symfony-project
+```
+
+### 2. Install PHP dependencies
+```bash
+composer install
+```
+
+### 3. Set up the database with Docker
+```bash
+# Start the PostgreSQL database container
+docker-compose up -d
+
+# Wait a few seconds for the database to initialize, then create the database schema
+php bin/console doctrine:database:create
+php bin/console doctrine:migrations:migrate
+```
+
+### 4. Load sample data (optional)
+```bash
+# Import the provided SQL data
+psql -h localhost -p 5432 -U app -d app < P12_yugioh.psql.sql
+```
+
+### 5. Install frontend assets
+```bash
+php bin/console importmap:install
+```
+
+### 6. Start the Symfony development server
+```bash
+symfony serve -d
+# Or alternatively:
+php -S localhost:8000 -t public/
+```
+
+The application will be available at `http://localhost:8000`.
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+### Available Routes
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+The application provides the following main functionalities:
+
+#### Homepage
+- **GET `/accueil`** - Welcome page with project information
+
+#### Card Management
+- **GET `/carte`** - Browse all cards with pagination
+- **GET `/carte/insert`** - Form to add a new card
+- **POST `/carte/insert`** - Submit new card data
+- **GET `/carte/{id}`** - View detailed card information
+- **GET `/carte/{id}/update`** - Form to edit existing card
+- **POST `/carte/{id}/update`** - Submit card updates
+- **GET `/carte/{id}/delete`** - Delete a card
+
+#### Edition Management
+- **GET `/edition`** - Browse all editions with pagination
+- **GET `/edition/insert`** - Form to add a new edition
+- **POST `/edition/insert`** - Submit new edition data
+- **GET `/edition/{id}`** - View edition details
+- **GET `/edition/{id}/update`** - Form to edit existing edition
+- **GET `/edition/{id}/delete`** - Delete an edition
+
+#### Language Management
+- **GET `/langue`** - Browse all supported languages
+- **GET `/langue/insert`** - Form to add a new language
+- **POST `/langue/insert`** - Submit new language data
+- **GET `/langue/{id}`** - View language details
+- **GET `/langue/{id}/update`** - Form to edit existing language
+- **GET `/langue/{id}/delete`** - Delete a language
+
+### Navigation
+
+The application features a clean navigation bar with:
+- **Cartes** - Card management section
+- **Editions** - Edition management section  
+- **Langues** - Language management section
+
+### Data Model
+
+The application manages three main entities:
+
+1. **Carte (Card)**
+   - Basic information (name, category, image)
+   - Game statistics (level, ATK, DEF)
+   - Descriptive data (type, attribute, description)
+
+2. **Edition**
+   - Edition name and release date
+   - Relationships with cards
+
+3. **Langue (Language)**
+   - Language names for internationalization
+
+## Development
+
+### Database Configuration
+
+The application is configured to use PostgreSQL. Update your `.env` file if needed:
+
+```env
+DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=16&charset=utf8"
+```
+
+### Running Tests
+
+```bash
+php bin/phpunit
+```
+
+### Debugging
+
+The application includes Symfony's debug toolbar and profiler in development mode. Access the profiler at `/_profiler`.
+
+### Code Quality
+
+```bash
+# Clear cache
+php bin/console cache:clear
+
+# Check routes
+php bin/console debug:router
+
+# Database schema validation
+php bin/console doctrine:schema:validate
+```
 
 ## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+Contributions are welcome! Please follow these guidelines:
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+### Development Setup
+
+1. Follow the installation instructions above
+2. Make sure all tests pass: `php bin/phpunit`
+3. Follow PSR-12 coding standards
+4. Add tests for new features
+5. Update documentation as needed
+
+## Authors and Acknowledgments
+
+- **Ronald Fagbehouro** - Developer
+- **Syrder Baptichon** - Developer  
+- **Amine Cheikh** - Developer
+
+Created as a final project for Symfony framework learning.
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+This project is proprietary software. All rights reserved.
+
+## Project Status
+
+This project is currently in active development as a learning exercise for Symfony framework and web development best practices.
